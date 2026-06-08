@@ -490,6 +490,44 @@ textarea {
   line-height: 1.45;
 }
 
+.evidence-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.evidence-item {
+  border: 1px solid #c3d0d9;
+  border-radius: 8px;
+  background: #fbfcfd;
+  padding: 12px;
+}
+
+.evidence-item strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.evidence-item p {
+  margin: 0;
+  color: #344250;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.evidence-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--orange);
+  background: var(--orange-soft);
+  color: #4b3a2a;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .matrix-table-wrap {
   overflow-x: auto;
 }
@@ -597,10 +635,11 @@ td textarea {
 }
 
 @media (max-width: 920px) {
-  .topbar,
-  .toolbar,
-  .detail-grid,
-  .strategy-grid {
+  .topbar, 
+  .toolbar, 
+  .detail-grid, 
+  .strategy-grid,
+  .evidence-list {
     grid-template-columns: 1fr;
   }
 
@@ -773,14 +812,14 @@ const starterCompetitors = [
     widthMm: 135,
     heightMm: 185,
     depthMm: 45,
-    weightG: 28,
+    weightG: 18,
     packCount: 15,
-    priceCad: 24.99,
-    salesSignal: "PepsiCo-owned better-for-you popped snack; official product line includes variety pack and protein snacks",
+    priceCad: 10.77,
+    salesSignal: "Walmart Canada showed 1000+ bought in the past month when checked; this is a retailer signal for the 15-bag format, not full-market sales",
     claims: "Never fried, no artificial flavors/colors/preservatives, non-GMO, gluten free, 120 calories per serving",
-    channel: "PopCorners official page / retail benchmark",
+    channel: "Walmart Canada / PopCorners official page",
     comparison: "Good benchmark for a large-company snack that uses simple claims and lighter processing cues.",
-    notes: "Single bag dimensions are a working estimate. Official PopCorners page confirms better-for-you claims; product line includes a 15-count variety pack.",
+    notes: "Walmart Canada lists 15 bags, 18g each, 270g total, CAD 10.77, and on-the-go use cases. Pouch dimensions are a working estimate.",
   },
   {
     id: "madegood-chocolate-chip",
@@ -1117,11 +1156,11 @@ function StrategySection() {
   const cards = [
     {
       title: "Small pouch",
-      text: "Use the 130 mm x 155 mm pouch for campus, office, gym, vending, convenience stores, and trial. The main job is portability and portion control.",
+      text: "Use the 130 mm x 155 mm pouch for campus, office, gym, vending, convenience stores, and trial. This recommendation comes from the small-unit competitor pattern and portion-control evidence.",
     },
     {
       title: "Multipack",
-      text: "Add 6/8/12-pack snack pouch options. Working outer-pack estimates are 285W x 165H x 75D mm, 285W x 165H x 95D mm, and 285W x 165H x 135D mm.",
+      text: "Test 6/8/12-pack snack pouch options. The 8-pack should be the first survey/pilot option because Quest uses an 8-count box and many competitors sell small units inside a larger pack.",
     },
     {
       title: "Regular pouch",
@@ -1141,6 +1180,53 @@ function StrategySection() {
         h("h3", null, card.title),
         h("p", null, card.text)
       ))
+    )
+  );
+}
+
+function EvidenceChainSection() {
+  const evidence = [
+    {
+      title: "Han package note",
+      text: "OHME! snack pouch is 130W x 155H mm with about CAD 0.10 bag cost. Regular pouches are larger and about CAD 0.50 per bag. This creates two different package roles: portable/trial and home/stock-up.",
+    },
+    {
+      title: "Quest + better-for-you sales signal",
+      text: "Quest sells 8 x 32g protein-chip bags. Snack Food & Wholesale Bakery reports Quest brand snacks grew 37.9% in better-for-you puffed/extruded snacks. This supports testing an 8-pack, but it is not exact pack-size sales.",
+    },
+    {
+      title: "PopCorners multipack signal",
+      text: "Walmart Canada lists PopCorners as 15 x 18g bags, CAD 10.77, and 1000+ bought in the past month when checked. This shows a small-unit multipack with a visible retailer demand signal.",
+    },
+    {
+      title: "MadeGood and That's it.",
+      text: "MadeGood uses 24g individual bags and That's it. sells 24 x 20g mini fruit bars. These are close benchmarks for OHME!'s small pouch, lunchbox, office, workout, and on-the-go occasions.",
+    },
+    {
+      title: "Package-size behavior research",
+      text: "A package-size study links smaller packages with lower purchase volume and higher unit prices. Hartman notes that single-serve packs help portion control but can raise waste concerns.",
+    },
+    {
+      title: "Strategy conclusion",
+      text: "Keep the regular pouch, test the snack pouch by occasion, and use the survey to compare 6-pack, 8-pack, and 12-pack options with price per pack, price per gram, convenience, and waste concerns.",
+    },
+  ];
+
+  return h("section", { className: "strategy-section" },
+    h("div", { className: "section-head compact" },
+      h("div", null,
+        h("h2", null, "How the package strategy was built"),
+        h("p", null, "The recommendation is based on source-backed package formats, public sales or retailer signals, and package-behavior research. Public sources usually do not report sales by exact package size.")
+      )
+    ),
+    h("div", { className: "evidence-list" },
+      evidence.map((item) => h("article", { key: item.title, className: "evidence-item" },
+        h("strong", null, item.title),
+        h("p", null, item.text)
+      ))
+    ),
+    h("p", { className: "evidence-note" },
+      "Use this as a testable strategy, not a final launch decision. Exact sales by package size should be checked through OHME! survey results, retailer feedback, direct company data if available, or a small pilot."
     )
   );
 }
@@ -1230,6 +1316,7 @@ function App() {
       ),
 
       h(StrategySection),
+      h(EvidenceChainSection),
 
       h(CompetitorMatrixSection, { competitors }),
 
