@@ -11,8 +11,12 @@
   --line: #eadbd5;
   --surface: #fff7f3;
   --panel: #ffffff;
+  --paper: #fffaf2;
   --brand-red: #d2291f;
   --brand-red-dark: #a91812;
+  --brand-orange: #f15a24;
+  --brand-yellow: #ffe96a;
+  --brand-lime: #a7d948;
   --brand-cream: #fff1e8;
   --brand-pink: #ffe4df;
   --blue: #245f73;
@@ -27,6 +31,7 @@
   --costco-blue-soft: #e8f2fa;
   --danger: #a43f46;
   --shadow: 0 14px 32px rgba(30, 45, 58, 0.12);
+  --brand-shadow: 0 22px 60px rgba(122, 48, 26, 0.16);
 }
 
 * {
@@ -36,7 +41,9 @@
 body {
   margin: 0;
   background:
-    linear-gradient(180deg, #fff9f5 0%, #fff3ee 48%, #f7fbfb 100%);
+    radial-gradient(circle at 12% 8%, rgba(255, 233, 106, 0.36), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(167, 217, 72, 0.22), transparent 25%),
+    linear-gradient(180deg, #fffaf2 0%, #fff2ed 46%, #f7fbfb 100%);
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -61,12 +68,16 @@ button {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: center;
-  padding: 24px 32px 18px;
-  background: #fffdfb;
-  border-bottom: 1px solid var(--line);
+  padding: 18px 28px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.93), rgba(255,245,238,0.93)),
+    repeating-linear-gradient(45deg, rgba(167,217,72,0.16) 0 18px, transparent 18px 36px);
+  border-bottom: 2px solid rgba(210, 41, 31, 0.16);
+  box-shadow: 0 10px 28px rgba(122, 48, 26, 0.08);
   position: sticky;
   top: 0;
   z-index: 20;
+  backdrop-filter: blur(14px);
 }
 
 .eyebrow {
@@ -114,7 +125,7 @@ h3 {
 main {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 24px 32px 40px;
+  padding: 24px 32px 56px;
 }
 
 .brand-mark {
@@ -122,8 +133,9 @@ main {
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
-  color: var(--brand-red);
-  font-size: 28px;
+  color: var(--brand-orange);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
   font-weight: 900;
   letter-spacing: 0;
 }
@@ -146,19 +158,250 @@ main {
 
 .nav-btn {
   min-height: 36px;
-  border: 1px solid #efc8c0;
+  border: 1px solid rgba(210, 41, 31, 0.24);
   border-radius: 999px;
-  background: #fff8f4;
+  background: rgba(255, 255, 255, 0.82);
   color: #5a3e38;
   padding: 7px 12px;
   font-size: 13px;
   font-weight: 800;
+  box-shadow: 0 8px 18px rgba(122, 48, 26, 0.06);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  border-color: var(--brand-orange);
+  background: #ffffff;
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .nav-btn.active {
-  border-color: var(--brand-red);
-  background: var(--brand-red);
+  border-color: var(--brand-orange);
+  background: var(--brand-orange);
   color: #ffffff;
+}
+
+.brand-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.82fr);
+  gap: 24px;
+  align-items: stretch;
+  min-height: 520px;
+  overflow: hidden;
+  border: 1px solid rgba(210, 41, 31, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 242, 0.96), rgba(255, 235, 228, 0.94)),
+    repeating-linear-gradient(45deg, rgba(167, 217, 72, 0.18) 0 24px, transparent 24px 48px);
+  box-shadow: var(--brand-shadow);
+  padding: 34px;
+}
+
+.brand-hero::before {
+  content: "OHME!";
+  position: absolute;
+  left: -18px;
+  top: 18px;
+  color: rgba(241, 90, 36, 0.12);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(104px, 20vw, 292px);
+  font-weight: 900;
+  line-height: 0.82;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-copy,
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy {
+  display: grid;
+  align-content: center;
+  max-width: 720px;
+}
+
+.hero-copy .eyebrow {
+  width: fit-content;
+  border: 1px solid rgba(210, 41, 31, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  padding: 6px 10px;
+}
+
+.hero-title {
+  margin: 0;
+  color: #b93a1e;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 8vw, 112px);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.hero-title span {
+  display: block;
+  color: #211f1d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(26px, 4vw, 54px);
+  font-weight: 900;
+}
+
+.hero-copy > p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: #44342d;
+  font-size: 17px;
+  line-height: 1.52;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.hero-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid rgba(210, 41, 31, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #5a3e38;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero-visual {
+  display: grid;
+  place-items: center;
+}
+
+.fruit-card {
+  position: relative;
+  width: min(100%, 440px);
+  min-height: 456px;
+  overflow: hidden;
+  border: 1px solid rgba(210, 41, 31, 0.18);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 42px rgba(122, 48, 26, 0.14);
+  transform: rotate(1deg);
+  transition: transform 220ms ease;
+}
+
+.fruit-card:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+.fruit-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 456px;
+  object-fit: cover;
+}
+
+.fruit-card-badge {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+.insight-lab {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.2fr);
+  gap: 14px;
+  border: 1px solid rgba(210, 41, 31, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #ffffff 0%, #fff8f1 100%);
+  padding: 16px;
+}
+
+.lab-note {
+  border-radius: 8px;
+  background: #111111;
+  color: #ffffff;
+  padding: 16px;
+}
+
+.lab-note h2 {
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.lab-note .eyebrow {
+  color: var(--brand-yellow);
+}
+
+.lab-note p {
+  margin-bottom: 0;
+  color: #f6e7df;
+  line-height: 1.45;
+}
+
+.lab-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lab-step {
+  appearance: none;
+  color: inherit;
+  text-align: left;
+  border: 1px solid rgba(210, 41, 31, 0.16);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 14px;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.lab-step:hover {
+  border-color: rgba(241, 90, 36, 0.44);
+  box-shadow: 0 12px 24px rgba(122, 48, 26, 0.1);
+  transform: translateY(-2px);
+}
+
+.lab-step span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--brand-yellow);
+  color: #5a3e38;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.lab-step p {
+  margin: 0;
+  color: #44342d;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .page-shell {
@@ -173,8 +416,9 @@ main {
   align-items: stretch;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fffdfb;
+  background: rgba(255, 253, 251, 0.94);
   padding: 18px;
+  box-shadow: 0 10px 26px rgba(122, 48, 26, 0.06);
 }
 
 .page-intro h2 {
@@ -213,6 +457,16 @@ main {
   border-radius: 8px;
   background: #ffffff;
   padding: 16px;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.summary-card:hover,
+.evidence-item:hover,
+.strategy-card:hover,
+.callout-pill:hover {
+  border-color: rgba(241, 90, 36, 0.38);
+  box-shadow: 0 12px 28px rgba(122, 48, 26, 0.08);
+  transform: translateY(-2px);
 }
 
 .summary-card h3 {
@@ -310,12 +564,13 @@ textarea {
 .primary-btn,
 .secondary-btn {
   min-height: 38px;
-  border: 1px solid #b8c5ce;
-  border-radius: 6px;
+  border: 1px solid rgba(210, 41, 31, 0.22);
+  border-radius: 999px;
   background: #ffffff;
   color: var(--ink);
-  padding: 8px 12px;
-  font-weight: 700;
+  padding: 9px 14px;
+  font-weight: 900;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .icon-btn {
@@ -324,14 +579,28 @@ textarea {
 }
 
 .primary-btn {
-  border-color: var(--brand-red);
-  background: var(--brand-red);
+  border-color: #111111;
+  background: #111111;
   color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+}
+
+.primary-btn:hover,
+.primary-btn:focus-visible {
+  background: var(--brand-orange);
+  border-color: var(--brand-orange);
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .secondary-btn:hover,
-.icon-btn:hover {
-  background: #f0f5f7;
+.secondary-btn:focus-visible,
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  border-color: var(--brand-orange);
+  background: #fff7ee;
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .zoom-value {
@@ -936,8 +1205,19 @@ td textarea {
   line-height: 1.4;
 }
 
+
+
+.brand-hero.no-hero-image {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 430px;
+}
+
+.brand-hero.no-hero-image .hero-copy {
+  max-width: 860px;
+}
 @media (max-width: 920px) {
   .topbar, 
+  .brand-hero,
   .page-intro,
   .summary-grid,
   .callout-strip,
@@ -945,6 +1225,8 @@ td textarea {
   .detail-grid, 
   .strategy-grid,
   .evidence-list,
+  .insight-lab,
+  .lab-steps,
   .costco-summary-grid {
     grid-template-columns: 1fr;
   }
@@ -957,6 +1239,34 @@ td textarea {
 
   h1 {
     font-size: 24px;
+  }
+
+  .brand-hero {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .brand-hero::before {
+    top: 8px;
+    font-size: 116px;
+  }
+
+  .fruit-card {
+    width: 100%;
+    min-height: 320px;
+    transform: none;
+  }
+
+  .fruit-card img {
+    min-height: 320px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-title span {
+    font-size: 27px;
   }
 
   .comparison-stage {
@@ -2229,8 +2539,54 @@ function AppNav({ activePage, setActivePage }) {
     appPages.map((page) => h("button", {
       key: page.id,
       className: `nav-btn${activePage === page.id ? " active" : ""}`,
+      "aria-pressed": activePage === page.id,
       onClick: () => setActivePage(page.id),
     }, page.label))
+  );
+}
+
+function BrandHero({ setActivePage }) {
+  return h("section", { className: "brand-hero no-hero-image", "aria-label": "OHME package strategy hero" },
+    h("div", { className: "hero-copy" },
+      h("p", { className: "eyebrow" }, "fruit-forward package workbench"),
+      h("h2", { className: "hero-title" }, "Snack data", h("span", null, "with nothing to hide")),
+      h("p", null, "A more OHME-style dashboard comparing package size, direct freeze-dried substitutes, bundle economics, and survey-ready decisions without losing research logic."),
+      h("div", { className: "hero-actions" },
+        h("button", { className: "primary-btn", onClick: () => setActivePage("comparator") }, "Compare packages"),
+        h("button", { className: "secondary-btn", onClick: () => setActivePage("matrix") }, "Open competitor matrix")
+      ),
+      h("div", { className: "hero-chip-row", "aria-label": "Key package decisions" },
+        ["44g trial pouch", "Regular home pouch", "6-pack Costco reference", "8-pack Amazon test"].map((item) =>
+          h("span", { key: item, className: "hero-chip" }, item)
+        )
+      )
+    )
+  );
+}
+
+function InteractionLab({ setActivePage }) {
+  const steps = [
+    ["shop-style", "Start with a clear choice: trial pouch, home pouch, or bundle test."],
+    ["fruit grid", "Use package visuals first, then explain price per pouch and substitute logic."],
+    ["survey pull", "Turn the dashboard into clean survey variables: recent spend, category, substitute, format interest."],
+  ];
+
+  return h("section", { className: "insight-lab", "aria-label": "OHME interaction inspired research flow" },
+    h("div", { className: "lab-note" },
+      h("p", { className: "eyebrow" }, "from brand interaction to analysis"),
+      h("h2", null, "Make the research feel clickable."),
+      h("p", null, "The OHME site sells through playful discovery. This dashboard now uses the same idea: each section moves the reader toward a package decision.")
+    ),
+    h("div", { className: "lab-steps" },
+      steps.map(([label, text]) => h("button", {
+        key: label,
+        className: "lab-step",
+        onClick: () => setActivePage(label === "fruit grid" ? "comparator" : label === "survey pull" ? "evidence" : "overview"),
+      },
+        h("span", null, label),
+        h("p", null, text)
+      ))
+    )
   );
 }
 
@@ -2271,6 +2627,7 @@ function OverviewPage({ setActivePage }) {
   ];
 
   return h("div", { className: "page-shell" },
+    h(BrandHero, { setActivePage }),
     h(PageIntro, {
       title: "Package strategy dashboard",
       text: "Use this version to present the work in a clearer order: start with the decision question, show package size visually, then move into competitor matrix, Amazon bundles, Costco bundles, and source-backed evidence.",
@@ -2302,6 +2659,7 @@ function OverviewPage({ setActivePage }) {
         ))
       )
     ),
+    h(InteractionLab, { setActivePage }),
     h("section", { className: "strategy-section" },
       h("div", { className: "section-head compact" },
         h("div", null,
