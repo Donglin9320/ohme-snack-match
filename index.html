@@ -2263,6 +2263,12 @@ function OverviewPage({ setActivePage }) {
       text: "Broader healthy snacks help explain bundle count, price per pouch, claims, and channel behaviour. Those are useful even when the product format differs.",
     },
   ];
+  const supervisorResponses = [
+    ["Competition scope", "Direct freeze-dried competitors are separated from broader snack benchmarks. 365, Crispy Green, Brothers All Natural, Natierra, and Origo-style Amazon freeze-dried options answer the substitute question; KIND, Quest, MadeGood, chips, and bars are kept only as packaging and value benchmarks."],
+    ["So what from dashboard", "The dashboard conclusion is not just a table: keep 44g as a trial/on-the-go pouch, keep the regular pouch for home and stock-up, and test 6-pack or 8-pack bundles because repeat buyers judge value by pack count, total price, and price per pouch."],
+    ["Survey correction", "The survey should avoid asking respondents to solve packaging operations. It should measure recent snack category and spend, direct substitutes, expected store category, package-format interest, and reaction to the current Amazon price."],
+    ["Validation still needed", "Public sources do not prove exact sales by package size. Survey results, retailer feedback, or a small Amazon or retail pilot should validate whether lower per-pouch multipacks improve repeat purchase."],
+  ];
 
   return h("div", { className: "page-shell" },
     h(PageIntro, {
@@ -2281,6 +2287,20 @@ function OverviewPage({ setActivePage }) {
         h("h3", null, card.title),
         h("p", null, card.text)
       ))
+    ),
+    h("section", { className: "strategy-section" },
+      h("div", { className: "section-head compact" },
+        h("div", null,
+          h("h2", null, "Supervisor feedback addressed"),
+          h("p", null, "This section answers why these competitors are included and what conclusions follow from the research.")
+        )
+      ),
+      h("div", { className: "evidence-list" },
+        supervisorResponses.map(([title, text]) => h("article", { key: title, className: "evidence-item" },
+          h("strong", null, title),
+          h("p", null, text)
+        ))
+      )
     ),
     h("section", { className: "strategy-section" },
       h("div", { className: "section-head compact" },
