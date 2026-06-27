@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OHME! Survey Reward</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root { --ink:#171312; --muted:#635650; --red:#ff3b18; --red-dark:#9b1d17; --paper:#fff2f1; --line:rgba(255,59,24,.28); --yellow:#fff2a7; --lime:#dff7b4; --shadow:0 24px 70px rgba(102,40,22,.14); }
+    *{box-sizing:border-box} html,body{overflow-x:hidden} body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#fff1f1 0%,#fffaf2 62%,#f7ffe8 100%)} a{color:inherit}
+    .topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px clamp(18px,4vw,48px);background:rgba(255,245,244,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}
+    .logo{color:var(--red);font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:900;text-decoration:none} nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+    .nav-link{min-height:34px;display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 12px;color:#593631;font-size:13px;font-weight:900;text-decoration:none}.nav-link.active{background:var(--red);color:#fff}
+    main{width:min(1220px,calc(100% - 32px));margin:0 auto;padding:32px 0 56px}
+    .hero{position:relative;overflow:hidden;min-height:560px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.82fr);gap:28px;align-items:center;border:2px solid var(--line);border-radius:18px;background:#fff7f4;box-shadow:var(--shadow);padding:clamp(28px,5vw,58px)}
+    .hero::before{content:"SPIN";position:absolute;left:-10px;top:6px;color:rgba(255,59,24,.13);font-family:Georgia,"Times New Roman",serif;font-size:clamp(110px,18vw,260px);font-weight:900;line-height:.85}.hero>*{position:relative;z-index:1}
+    .eyebrow{display:inline-flex;width:fit-content;margin:0 0 14px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;color:var(--red-dark);font-size:12px;font-weight:900;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0} h1{margin-bottom:16px;color:var(--red);font-family:Georgia,"Times New Roman",serif;font-size:clamp(54px,8vw,108px);line-height:.88;text-transform:uppercase} h1 span{display:block;color:#171312;font-family:Arial,Helvetica,sans-serif;font-size:clamp(28px,4vw,54px)} p{color:var(--muted);line-height:1.5} h1,h2,h3,p,a,strong,span{overflow-wrap:break-word}
+    .visual{position:relative;min-height:440px;display:grid;grid-template-columns:minmax(130px,.68fr) minmax(210px,1fr);gap:18px;align-items:center;padding:18px;border:1px solid rgba(255,59,24,.18);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,242,167,.34));box-shadow:inset 0 0 0 10px rgba(255,255,255,.26)}
+    .visual::before{content:"Survey reward";position:absolute;left:18px;top:18px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;color:var(--red-dark);font-size:11px;font-weight:900;text-transform:uppercase}
+    .visual img{position:relative;z-index:1;width:100%;max-width:230px;justify-self:end;filter:drop-shadow(0 24px 30px rgba(102,40,22,.18));transform:rotate(-5deg)}
+    .wheel{position:relative;z-index:2;width:min(330px,100%);aspect-ratio:1;justify-self:start;border:12px solid #fff;border-radius:50%;background:conic-gradient(#ffe96a 0 60deg,#ffdcd5 60deg 120deg,#a7d948 120deg 180deg,#fff 180deg 240deg,#ffb38f 240deg 300deg,#c5f084 300deg 360deg);box-shadow:0 30px 80px rgba(98,45,24,.22);animation:floatSpin 8s linear infinite}
+    .wheel::after{content:"OHME!";position:absolute;left:50%;top:50%;display:grid;place-items:center;width:92px;height:92px;border:8px solid #fff;border-radius:50%;background:var(--red);color:#fff;font-family:Georgia,"Times New Roman",serif;font-weight:900;transform:translate(-50%,-50%)}
+    @keyframes floatSpin{to{transform:rotate(360deg)}} .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--red);color:#fff;padding:11px 18px;font-weight:900;text-decoration:none;border:0}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.yellow{background:var(--yellow);color:#241b16}
+    .section{margin-top:24px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.86);box-shadow:0 16px 44px rgba(102,40,22,.08);padding:clamp(22px,4vw,36px)}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.step{border:2px solid var(--line);border-radius:16px;background:#fff;padding:18px}.step strong{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;margin-bottom:12px}
+    @media(max-width:900px){.topbar{align-items:flex-start;flex-direction:column}.hero,.steps{grid-template-columns:1fr}nav{justify-content:flex-start}.visual{min-height:auto}.visual img{max-width:200px}.wheel{width:min(300px,100%)}}
+    @media(max-width:560px){main{width:min(100% - 22px,1220px);max-width:100%;padding-top:18px}.hero{min-height:0;max-width:100%;padding:22px}h1{font-size:46px}h1 span{font-size:28px}.hero p{font-size:15px;overflow-wrap:normal;word-break:normal}.btn{width:100%;text-align:center}.btn-row{width:100%}.wheel{justify-self:center;width:min(250px,68vw);border-width:10px;animation:none}.wheel::after{width:78px;height:78px;font-size:18px}.visual{grid-template-columns:1fr;padding:48px 12px 16px;overflow:hidden}.visual img{justify-self:center;max-width:210px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">OHME!</a>
+    <nav aria-label="Site pages">
+      <a class="nav-link" href="index.html">Snack Match</a>
+      <a class="nav-link" href="bundles.html">Bundles & Prices</a>
+      <a class="nav-link" href="why-ohme.html">Why OHME?</a>
+      <a class="nav-link active" href="survey-reward.html">Survey Reward</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Complete survey, unlock reward</p>
+        <h1>Spin after <span>your snack match.</span></h1>
+        <p>Start with the snack match, complete the OHME survey, then return to spin for a discount. The live wheel is on the Snack Match page so the survey redirect can unlock it with <strong>?completed=1</strong>.</p>
+        <div class="btn-row">
+          <a class="btn" href="index.html#quiz">Start snack match</a>
+          <a class="btn yellow" href="index.html#reward">Go to wheel</a>
+          <a class="btn secondary" href="https://ubc.yul1.qualtrics.com/jfe/form/SV_a3OFwn3XlmaYRFA" target="_blank" rel="noreferrer">Open survey</a>
+        </div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <img src="https://www.ohmefoods.com/cdn/shop/files/strawberry.png?v=1774645406&width=700" alt="" />
+        <div class="wheel"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="steps">
+        <article class="step"><strong>1</strong><h3>Find your match</h3><p>Answer short snack questions first, so the survey has context.</p></article>
+        <article class="step"><strong>2</strong><h3>Complete survey</h3><p>Survey responses help OHME learn package, bundle, and price signals.</p></article>
+        <article class="step"><strong>3</strong><h3>Unlock reward</h3><p>Qualtrics can redirect back with <code>?completed=1</code> to unlock the live wheel.</p></article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
