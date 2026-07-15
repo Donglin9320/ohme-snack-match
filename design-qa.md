@@ -42,6 +42,7 @@ Focused screenshots were required because the user's annotations specifically id
 - `/tmp/ohme-origo-full-mobile.png` shows the complete Origo multipack.
 - `/tmp/ohme-madegood-full-final.png` shows the complete MadeGood box and pouch with no label obstruction.
 - Browser checks found no console errors and no desktop or mobile document overflow.
+- Desktop and mobile comparison controls both advance through all three roles.
 
 ## Findings
 
