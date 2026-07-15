@@ -1,8 +1,8 @@
-# OHME! Package Comparator Redesign
+# OHME! Snack Match Redesign
 
 ## Goal
 
-Make the package comparator feel closer to OHME!'s consumer brand while keeping the research dashboard useful for supervisor review. The page should feel fresh, fruit-forward, and interactive, but the main job is still to explain package-size strategy, competitor scope, survey logic, and evidence.
+Create a consumer-facing OHME! product discovery page that feels close to the OHME brand while preserving useful, source-linked pack and price context. The page should feel fresh, fruit-forward, and interactive, with Snack Match as the main job.
 
 ## References
 

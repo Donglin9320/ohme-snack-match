@@ -87,7 +87,7 @@ test("returns three unique, available recommendations ordered by score", () => {
   assert.ok(PRODUCTS.length >= 7);
 });
 
-test("keeps every Snack Match entry point on the comparator page", () => {
+test("keeps every Snack Match entry point on the product discovery page", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
   assert.match(html, /id="snack-match"/);
@@ -127,10 +127,11 @@ test("adds an image-led, keyboard-accessible comparison role scroller", () => {
   assert.match(html, /event\.key !== "ArrowLeft"/);
 });
 
-test("makes the updated comparator and Snack Match the project homepage", () => {
+test("makes OHME! Snack Match the project homepage", () => {
   const rootHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 
-  assert.match(rootHtml, /competitor-comparator\//);
+  assert.match(rootHtml, /snack-match\//);
+  assert.doesNotMatch(rootHtml, /competitor-comparator\//);
   assert.match(rootHtml, /window\.location\.replace/);
   assert.match(rootHtml, /window\.location\.search/);
   assert.match(rootHtml, /window\.location\.hash/);

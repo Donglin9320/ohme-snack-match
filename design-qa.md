@@ -1,7 +1,7 @@
 # OHME Homepage Design QA
 
 - Source visual truth: `/Users/lidonglin/Downloads/用户附件.png`
-- Implementation: `http://127.0.0.1:4178/competitor-comparator/`
+- Implementation: `http://127.0.0.1:4178/snack-match/`
 - Final implementation screenshot: `/tmp/ohme-homepage-hero-qa-final.png`
 - Combined comparison board: `/tmp/ohme-design-qa-comparison-final.png`
 - Focused Origo evidence: `/tmp/ohme-origo-full-mobile.png`

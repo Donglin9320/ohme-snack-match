@@ -1,4 +1,4 @@
-# OHME! Competitor Comparator Website Design
+# OHME! Snack Match Website Design
 
 ## Purpose
 
