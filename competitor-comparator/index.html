@@ -289,6 +289,7 @@
       .purpose-item span { color: var(--muted); font-size: 13px; line-height: 1.4; }
 
       .section {
+        scroll-margin-top: 96px;
         margin-top: 24px;
         border: 2px solid var(--ink);
         border-radius: var(--radius-lg);
@@ -304,23 +305,104 @@
       }
       .section-head p { margin-bottom: 0; }
 
+      .read-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+      .read-status {
+        margin: 0;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .read-control-group { display: flex; gap: 8px; }
+      .read-scroll-button {
+        min-width: 48px;
+        min-height: 44px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .read-scroll-button:hover:not(:disabled) { background: var(--mint); transform: translateY(-2px); }
+      .read-scroll-button:disabled { opacity: 0.35; cursor: not-allowed; }
       .read-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        display: flex;
         gap: 14px;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        padding: 0 0 12px;
+        scroll-padding-inline: 1px;
+        scroll-snap-type: inline mandatory;
+        scrollbar-color: var(--red) rgba(24, 18, 15, 0.1);
+        scrollbar-width: thin;
       }
       .read-card {
-        min-height: 270px;
+        min-height: 520px;
+        flex: 0 0 clamp(360px, 64%, 760px);
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         border: 2px solid var(--ink);
         border-radius: var(--radius-md);
-        padding: 24px;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
       .read-card:nth-child(1) { background: var(--mint); }
       .read-card:nth-child(2) { background: var(--pink); }
       .read-card:nth-child(3) { background: var(--cream); }
+      .read-media {
+        position: relative;
+        height: 280px;
+        margin: 0;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        border-bottom: 2px solid var(--ink);
+        background: #fff;
+        padding: 20px;
+      }
+      .read-media img { width: 100%; height: 100%; object-fit: contain; }
+      .read-media figcaption {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: var(--paper);
+        padding: 6px 9px;
+        color: var(--ink);
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .read-copy { flex: 1; padding: 24px 24px 18px; }
+      .read-copy p:last-child { margin-bottom: 0; }
+      .read-card-footer {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 24px 24px;
+      }
+      .read-role-note {
+        max-width: 190px;
+        color: var(--ink);
+        font-size: 10px;
+        font-weight: 900;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
       .read-number {
         font-family: Georgia, "Times New Roman", serif;
         font-size: 76px;
@@ -806,12 +888,15 @@
         .hero-visual { min-height: 410px; }
         .hero-product { width: min(74%, 330px); }
         .purpose-strip,
-        .read-grid,
         .advantage-rail,
         .story-grid,
         .source-grid,
         .closing-cta { grid-template-columns: 1fr; }
-        .section { padding: 26px 18px; border-radius: 22px; }
+        .read-card { min-height: 500px; flex-basis: 88%; }
+        .read-media { height: 230px; }
+        .read-controls { align-items: flex-end; }
+        .read-status { max-width: 190px; line-height: 1.35; }
+        .section { scroll-margin-top: 132px; padding: 26px 18px; border-radius: 22px; }
         .filter-bar { top: 112px; flex-wrap: nowrap; overflow-x: auto; border-radius: 16px; scrollbar-width: none; }
         .filter-button { flex: 0 0 auto; }
         .filter-count { display: none; }
@@ -883,18 +968,37 @@
           <div><p class="eyebrow">Comparison method</p><h2>Three roles, not one ranking.</h2></div>
           <p>A granola bite can teach us about portioning without being the same product as freeze-dried fruit. The page separates each role so the comparison stays honest and useful.</p>
         </div>
-        <div class="read-grid">
+        <div class="read-controls">
+          <p class="read-status" id="read-status" role="status" aria-live="polite">Role 1 of 3 · OHME anchor</p>
+          <div class="read-control-group" aria-label="Scroll comparison roles">
+            <button class="read-scroll-button" id="read-previous" type="button" aria-label="Show previous comparison role" aria-controls="read-track">←</button>
+            <button class="read-scroll-button" id="read-next" type="button" aria-label="Show next comparison role" aria-controls="read-track">→</button>
+          </div>
+        </div>
+        <div class="read-grid" id="read-track" role="region" aria-label="Three comparison roles" tabindex="0">
           <article class="read-card">
-            <div><p class="eyebrow">OHME anchor</p><h3>Start with the product story OHME actually tells.</h3><p>Fruit-led, freeze-dried, crunchy products presented through current public OHME pages.</p></div>
-            <span class="read-number">01</span>
+            <figure class="read-media">
+              <img src="assets/ohme-strawberry-yogurt-crunch.png" alt="OHME freeze-dried strawberry yogurt crunch pouch" loading="lazy" />
+              <figcaption>Official OHME product image</figcaption>
+            </figure>
+            <div class="read-copy"><p class="eyebrow">OHME anchor</p><h3>Start with the product story OHME actually tells.</h3><p>Fruit-led, freeze-dried, crunchy products presented through current public OHME pages.</p></div>
+            <div class="read-card-footer"><span class="read-role-note">Brand truth comes first</span><span class="read-number">01</span></div>
           </article>
           <article class="read-card">
-            <div><p class="eyebrow">Closest formats</p><h3>Compare product form before packaging style.</h3><p>Freeze-dried fruit and crunchy fruit formats are the closest shelf references in this public set.</p></div>
-            <span class="read-number">02</span>
+            <figure class="read-media">
+              <img src="assets/origo-strawberry.jpg" alt="Origo freeze-dried strawberry pouches and multipack box" loading="lazy" />
+              <figcaption>Closest public format</figcaption>
+            </figure>
+            <div class="read-copy"><p class="eyebrow">Closest formats</p><h3>Compare product form before packaging style.</h3><p>Freeze-dried fruit and crunchy fruit formats are the closest shelf references in this public set.</p></div>
+            <div class="read-card-footer"><span class="read-role-note">Product form is the comparison</span><span class="read-number">02</span></div>
           </article>
           <article class="read-card">
-            <div><p class="eyebrow">Packaging references</p><h3>Borrow the question, not the product positioning.</h3><p>Bars, granola bites, and low-sugar candy help illustrate portability, portioning, and variety packs.</p></div>
-            <span class="read-number">03</span>
+            <figure class="read-media">
+              <img src="assets/madegood-chocolate-chip.png" alt="MadeGood chocolate chip granola bites box and single-serve pouch" loading="lazy" />
+              <figcaption>Packaging reference only</figcaption>
+            </figure>
+            <div class="read-copy"><p class="eyebrow">Packaging references</p><h3>Borrow the question, not the product positioning.</h3><p>Bars, granola bites, and low-sugar candy help illustrate portability, portioning, and variety packs.</p></div>
+            <div class="read-card-footer"><span class="read-role-note">Learn from the pack, not the claim</span><span class="read-number">03</span></div>
           </article>
         </div>
       </section>
@@ -1138,6 +1242,53 @@
 
     <script src="snack-match.js"></script>
     <script>
+      const readTrack = document.getElementById("read-track");
+      const readCards = Array.from(document.querySelectorAll(".read-card"));
+      const readPrevious = document.getElementById("read-previous");
+      const readNext = document.getElementById("read-next");
+      const readStatus = document.getElementById("read-status");
+      let readFrame;
+
+      function activeReadCardIndex() {
+        const trackCenter = readTrack.scrollLeft + (readTrack.clientWidth / 2);
+        return readCards.reduce((closest, card, index) => {
+          const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+          const distance = Math.abs(cardCenter - trackCenter);
+          return distance < closest.distance ? { index, distance } : closest;
+        }, { index: 0, distance: Infinity }).index;
+      }
+
+      function updateReadControls() {
+        const activeIndex = activeReadCardIndex();
+        const role = readCards[activeIndex].querySelector(".eyebrow").textContent;
+        readStatus.textContent = `Role ${activeIndex + 1} of ${readCards.length} · ${role}`;
+        readPrevious.disabled = activeIndex === 0;
+        readNext.disabled = activeIndex === readCards.length - 1;
+      }
+
+      function moveReadTrack(direction) {
+        const activeIndex = activeReadCardIndex();
+        const nextIndex = Math.max(0, Math.min(readCards.length - 1, activeIndex + direction));
+        readTrack.scrollTo({
+          left: readCards[nextIndex].offsetLeft,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        });
+      }
+
+      readPrevious.addEventListener("click", () => moveReadTrack(-1));
+      readNext.addEventListener("click", () => moveReadTrack(1));
+      readTrack.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        moveReadTrack(event.key === "ArrowRight" ? 1 : -1);
+      });
+      readTrack.addEventListener("scroll", () => {
+        window.cancelAnimationFrame(readFrame);
+        readFrame = window.requestAnimationFrame(updateReadControls);
+      }, { passive: true });
+      window.addEventListener("resize", updateReadControls);
+      updateReadControls();
+
       const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
       const productCards = Array.from(document.querySelectorAll("[data-lane]"));
       const laneGroups = Array.from(document.querySelectorAll("[data-lane-group]"));

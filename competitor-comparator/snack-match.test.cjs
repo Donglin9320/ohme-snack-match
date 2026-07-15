@@ -113,3 +113,25 @@ test("uses specific published-survey language and explains pack size and reseala
   assert.match(html, /data-match-key="size"/);
   assert.match(html, /data-match-key="mix"/);
 });
+
+test("adds an image-led, keyboard-accessible comparison role scroller", () => {
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+
+  assert.match(html, /id="read-track"/);
+  assert.match(html, /id="read-previous"/);
+  assert.match(html, /id="read-next"/);
+  assert.match(html, /scroll-snap-type: inline mandatory/);
+  assert.match(html, /assets\/ohme-strawberry-yogurt-crunch\.png/);
+  assert.match(html, /assets\/origo-strawberry\.jpg/);
+  assert.match(html, /assets\/madegood-chocolate-chip\.png/);
+  assert.match(html, /event\.key !== "ArrowLeft"/);
+});
+
+test("makes the updated comparator and Snack Match the project homepage", () => {
+  const rootHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+
+  assert.match(rootHtml, /competitor-comparator\//);
+  assert.match(rootHtml, /window\.location\.replace/);
+  assert.match(rootHtml, /window\.location\.search/);
+  assert.match(rootHtml, /window\.location\.hash/);
+});
