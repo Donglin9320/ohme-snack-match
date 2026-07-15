@@ -135,3 +135,26 @@ test("makes the updated comparator and Snack Match the project homepage", () => 
   assert.match(rootHtml, /window\.location\.search/);
   assert.match(rootHtml, /window\.location\.hash/);
 });
+
+test("matches the OHME brand-home reference with moment imagery and interactive entry points", () => {
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+
+  assert.match(html, /How will you OHME\?/);
+  assert.match(html, /Find your OHME moment/);
+  assert.match(html, /Pick your crunch/);
+  assert.match(html, /ohme-moment-on-the-go\.jpg/);
+  assert.match(html, /ohme-moment-topping\.jpg/);
+  assert.match(html, /ohme-moment-lunchbox\.jpg/);
+  assert.match(html, /ohme-moment-sharing\.jpg/);
+  assert.match(html, /data-moment="on-the-go"/);
+  assert.match(html, /data-crunch="yogurt"/);
+  assert.match(html, /data-compare-tab="ingredients"/);
+});
+
+test("shows complete Origo and MadeGood images without cover cropping", () => {
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+
+  assert.match(html, /\.read-media img \{[^}]*object-fit: contain;/s);
+  assert.match(html, /Complete Origo freeze-dried strawberry pouches and multipack box/);
+  assert.match(html, /Complete MadeGood chocolate chip granola bites box and single-serve pouch/);
+});
