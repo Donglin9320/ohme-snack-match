@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Answer five quick questions to find an OHME snack that fits your taste, occasion, pack preference, and budget." />
+    <meta name="description" content="Choose fruit or yogurt crunch, then answer four quick questions to find an OHME snack that fits your occasion, pack preference, and budget." />
     <link rel="canonical" href="https://donglin9320.github.io/ohme-snack-match/snack-match/" />
     <link rel="icon" href="data:," />
     <title>OHME! Snack Match · Find Your Crunch</title>
@@ -277,7 +277,7 @@
       }
       .moment-button:hover { background: var(--yellow); }
 
-      .crunch-section { background: var(--paper); padding: 18px 0 44px; text-align: center; }
+      .crunch-section { scroll-margin-top: 90px; background: var(--mint); padding: 56px 0 20px; text-align: center; }
       .crunch-section h2,
       .compare-teaser h2 {
         margin-bottom: 18px;
@@ -286,6 +286,7 @@
         letter-spacing: -0.04em;
         line-height: 0.95;
       }
+      .crunch-helper { max-width: 620px; margin: -6px auto 18px; font-size: 13px; }
       .crunch-toggle { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
       .crunch-choice {
         min-width: min(330px, 44vw);
@@ -329,9 +330,8 @@
 
       .match-section,
       .benchmark-section,
-      .matrix-section,
-      .sources-section { scroll-margin-top: 90px; padding: 72px 0; }
-      .match-section { background: var(--mint); }
+      .matrix-section { scroll-margin-top: 90px; padding: 72px 0; }
+      .match-section { background: var(--mint); padding-top: 28px; }
       .section-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr); gap: 30px; align-items: end; margin-bottom: 30px; }
       .section-heading h2 { margin-bottom: 0; color: var(--red-dark); font-size: clamp(52px, 7vw, 98px); letter-spacing: -0.055em; line-height: 0.85; }
       .section-heading p { margin-bottom: 0; }
@@ -344,10 +344,11 @@
         font-size: 12px;
         line-height: 1.5;
       }
-      .match-layout { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr); gap: 18px; align-items: start; }
+      .match-layout { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
+      .match-layout.has-result { grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr); }
       .match-form,
       .match-result { border: 1.5px solid var(--red); border-radius: 26px; background: var(--paper); padding: 22px; }
-      .match-form { display: grid; gap: 14px; }
+      .match-form { scroll-margin-top: 126px; display: grid; gap: 14px; }
       .match-question { margin: 0; border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
       .match-question legend { padding: 0 7px; font-family: Georgia, "Times New Roman", serif; font-size: 19px; font-weight: 900; }
       .match-options { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -375,9 +376,8 @@
       .match-submit:disabled { opacity: 0.45; cursor: not-allowed; }
       .match-reset { background: var(--paper); color: var(--red-dark); }
       .match-result { position: sticky; top: 96px; min-height: 570px; }
-      .match-placeholder { min-height: 520px; display: grid; place-items: center; border: 1.5px dashed var(--red); border-radius: 20px; background: var(--yellow); padding: 28px; text-align: center; }
-      .match-placeholder strong { display: block; margin-bottom: 12px; color: var(--red-dark); font-family: Georgia, "Times New Roman", serif; font-size: 42px; line-height: 0.93; }
-      .match-placeholder p { margin-bottom: 0; }
+      .match-result[hidden] { display: none; }
+      .match-error { margin: 0; border: 1.5px dashed var(--red); border-radius: 18px; background: var(--yellow); padding: 20px; font-weight: 900; }
       .match-result-head h3 { margin-bottom: 8px; color: var(--red-dark); font-size: 46px; line-height: 0.92; }
       .match-primary { display: grid; grid-template-columns: minmax(170px, 0.7fr) minmax(0, 1fr); gap: 16px; align-items: center; border: 1.5px solid var(--red); border-radius: 20px; background: var(--pink); padding: 16px; }
       .match-primary img { width: 100%; height: 260px; object-fit: contain; }
@@ -433,45 +433,36 @@
         object-fit: contain;
         object-position: center;
       }
+      .category-visual {
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        min-height: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 18px;
+        padding: 22px;
+        text-align: center;
+      }
+      .category-visual strong {
+        max-width: 360px;
+        color: var(--red-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(30px, 4vw, 52px);
+        line-height: 0.95;
+      }
+      .category-fruit {
+        background-color: var(--mint);
+        background-image: radial-gradient(circle at 22% 28%, rgba(230,66,47,0.2) 0 9%, transparent 10%), radial-gradient(circle at 78% 72%, rgba(200,47,36,0.14) 0 12%, transparent 13%), radial-gradient(circle at 72% 22%, rgba(255,240,169,0.9) 0 8%, transparent 9%);
+      }
+      .category-granola { background: repeating-linear-gradient(135deg, var(--yellow) 0 34px, #f7dca0 34px 68px); }
       .read-media figcaption { position: absolute; left: 12px; top: 12px; border: 1px solid var(--red); border-radius: 999px; background: var(--paper); padding: 6px 9px; color: var(--red-dark); font-size: 9px; font-weight: 900; text-transform: uppercase; }
       .read-copy { flex: 1; padding: 22px; }
       .read-copy h3 { font-size: 28px; line-height: 0.98; }
       .read-card-footer { display: flex; align-items: end; justify-content: space-between; gap: 12px; padding: 0 22px 22px; }
       .read-role-note { max-width: 180px; font-size: 10px; font-weight: 900; text-transform: uppercase; }
       .read-number { font-family: Georgia, "Times New Roman", serif; font-size: 68px; line-height: 0.7; }
-
-      .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 36px 0 20px; }
-      .filter-button { min-height: 42px; border: 1.5px solid var(--red); border-radius: 999px; background: var(--paper); padding: 8px 13px; color: var(--red-dark); font-weight: 900; cursor: pointer; }
-      .filter-button[aria-pressed="true"] { background: var(--red); color: #fff; }
-      .filter-count { min-height: 42px; display: inline-flex; align-items: center; margin-left: auto; color: var(--muted); font-size: 12px; font-weight: 900; }
-      .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-      .product-card { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); }
-      .product-card[hidden] { display: none; }
-      .product-media {
-        height: 270px;
-        min-height: 0;
-        margin: 0;
-        overflow: hidden;
-        display: grid;
-        place-items: center;
-        border-bottom: 1px solid var(--line);
-        background: #fff;
-        padding: 24px;
-      }
-      .product-media img {
-        width: 100%;
-        height: 100%;
-        min-width: 0;
-        min-height: 0;
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        object-position: center;
-      }
-      .product-copy { padding: 18px; }
-      .product-copy h3 { margin-bottom: 8px; font-size: 25px; line-height: 0.98; }
-      .product-copy p { font-size: 13px; }
-      .product-source { color: var(--red-dark); font-size: 12px; font-weight: 900; }
 
       .matrix-section { background: var(--pink); }
       .matrix-wrap { overflow-x: auto; border: 1.5px solid var(--red); border-radius: 20px; background: var(--paper); }
@@ -482,14 +473,6 @@
       td { color: var(--muted); font-size: 13px; line-height: 1.45; }
       td strong { display: block; color: var(--ink); }
 
-      .sources-section { background: var(--paper); }
-      .source-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-      .source-card { border: 1.5px solid var(--red); border-radius: 20px; background: var(--cream); padding: 20px; }
-      .source-card:nth-child(2) { background: var(--mint); }
-      .source-card:nth-child(3) { background: var(--yellow); }
-      .source-card h3 { font-size: 28px; }
-      .source-card a { display: inline-block; margin: 4px 8px 4px 0; color: var(--red-dark); font-size: 12px; font-weight: 900; }
-
       footer { background: var(--red); color: #fff; }
       .footer-inner { width: var(--page); min-height: 110px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 0; }
       .footer-inner strong { font-family: Georgia, "Times New Roman", serif; font-size: 34px; }
@@ -498,10 +481,10 @@
       @media (max-width: 1080px) {
         .brand-nav a { padding-inline: 10px; font-size: 10px; }
         .hero-stage { min-height: 760px; }
-        .match-layout { grid-template-columns: 1fr; }
+        .match-layout,
+        .match-layout.has-result { grid-template-columns: 1fr; }
         .match-result { position: static; min-height: 0; }
         .section-heading { grid-template-columns: 1fr; }
-        .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
 
       @media (max-width: 760px) {
@@ -529,8 +512,9 @@
         .trust-layout img { width: 210px; height: 160px; margin: 0 auto; }
         .match-section,
         .benchmark-section,
-        .matrix-section,
-        .sources-section { scroll-margin-top: 126px; padding: 50px 0; }
+        .matrix-section { scroll-margin-top: 126px; padding: 50px 0; }
+        .crunch-section { scroll-margin-top: 126px; padding-top: 42px; }
+        .match-section { padding-top: 24px; }
         .section-heading h2 { font-size: clamp(46px, 16vw, 70px); }
         .match-form,
         .match-result { padding: 16px; border-radius: 20px; }
@@ -542,11 +526,7 @@
         .match-reset { width: 100%; }
         .read-card { flex-basis: 88%; min-height: 500px; }
         .read-media { height: 300px; flex-basis: 300px; padding: 48px 24px 24px; }
-        .filter-bar { flex-wrap: nowrap; overflow-x: auto; }
-        .filter-button { flex: 0 0 auto; }
-        .filter-count { display: none; }
-        .product-grid,
-        .source-grid { grid-template-columns: 1fr; }
+        .category-visual strong { font-size: 30px; }
         .footer-inner { align-items: flex-start; flex-direction: column; }
       }
 
@@ -602,28 +582,18 @@
         </div>
       </section>
 
-      <section class="crunch-section" aria-labelledby="crunch-title">
-        <div class="section-shell">
-          <h2 id="crunch-title">Pick your crunch</h2>
-          <div class="crunch-toggle" role="group" aria-label="Choose an OHME crunch family">
-            <button class="crunch-choice" type="button" data-crunch="fruit" aria-pressed="true"><span>Fruit Crunch</span><img src="assets/ohme-fruit-collage.png" alt="" /></button>
-            <button class="crunch-choice" type="button" data-crunch="yogurt" aria-pressed="false"><img src="assets/ohme-snack-word.png" alt="" /><span>Yogurt Crunch</span></button>
-          </div>
-        </div>
-      </section>
-
       <section class="compare-teaser" aria-labelledby="compare-title">
         <div class="section-shell compare-layout">
           <div>
-            <h2 id="compare-title">Curious how it compares?</h2>
+            <h2 id="compare-title">See what makes OHME different.</h2>
             <div class="compare-tabs" role="group" aria-label="Preview comparison topic">
-              <button class="compare-tab" type="button" data-compare-tab="ingredients" aria-pressed="true">Ingredients</button>
-              <button class="compare-tab" type="button" data-compare-tab="pack">Pack format</button>
-              <button class="compare-tab" type="button" data-compare-tab="price">Public price</button>
+              <button class="compare-tab" type="button" data-compare-tab="ingredients" aria-pressed="true">Product base</button>
+              <button class="compare-tab" type="button" data-compare-tab="texture">Texture</button>
+              <button class="compare-tab" type="button" data-compare-tab="pack">Pack choice</button>
             </div>
-            <p class="compare-panel" id="compare-panel" role="status">OHME leads with real fruit, freeze-dried texture, and no-added-sugar cues. Benchmark products are separated by comparison role so unlike snacks are not treated as direct equivalents.</p>
+            <p class="compare-panel" id="compare-panel" role="status">OHME starts with real fruit, with fruit-only and yogurt-crunch options. The comparison below stays at category level and does not use competitor branding.</p>
           </div>
-          <a class="pill-link" href="#benchmarks">Explore benchmarks</a>
+          <a class="pill-link" href="#benchmarks">See category differences</a>
         </div>
       </section>
 
@@ -635,13 +605,25 @@
         </div>
       </section>
 
+      <section class="crunch-section" aria-labelledby="crunch-title">
+        <div class="section-shell">
+          <p class="eyebrow">First, choose your product family</p>
+          <h2 id="crunch-title">Pick your crunch</h2>
+          <p class="crunch-helper">This choice replaces the repeated bundle-mix question and will carry directly into your recommendation.</p>
+          <div class="crunch-toggle" role="group" aria-label="Choose an OHME crunch family">
+            <button class="crunch-choice" type="button" data-crunch="fruit" aria-pressed="false"><span>Fruit Crunch</span><img src="assets/ohme-fruit-collage.png" alt="" /></button>
+            <button class="crunch-choice" type="button" data-crunch="yogurt" aria-pressed="false"><img src="assets/ohme-snack-word.png" alt="" /><span>Yogurt Crunch</span></button>
+          </div>
+        </div>
+      </section>
+
       <section class="match-section" id="snack-match" aria-labelledby="match-title">
         <div class="section-shell">
           <div class="section-heading">
             <div><p class="eyebrow">Snack Match · stays on this page</p><h2 id="match-title">Which OHME fits you?</h2></div>
-            <p>Answer five purchase questions drawn from OHME's published Qualtrics survey. Your answers are combined with exact pack formats and current public OHME prices.</p>
+            <p>Your Fruit or Yogurt Crunch choice is already saved. Answer four quick shopping and pack questions to build your shortlist.</p>
           </div>
-          <p class="match-source-note"><strong>Question source:</strong> Published Qualtrics survey questions 5, 7, 8, 10, and 11. <strong>Pack comparison:</strong> 3 × 16g snack-size pouches versus a 44g resealable regular pouch. <strong>Price source:</strong> OHME's public Shopify product data, checked July 15, 2026. Prices and availability can change. No response data is read or stored.</p>
+          <p class="match-source-note"><strong>Question basis:</strong> Four published Qualtrics questions about buyer, occasion, purchase priority, and pack size. <strong>Pack comparison:</strong> 3 × 16g snack-size pouches versus a 44g resealable regular pouch. <strong>Prices:</strong> Current public OHME listings, checked July 15, 2026. No responses are read or stored.</p>
           <div class="match-layout">
             <form class="match-form" id="snack-match-form">
               <fieldset class="match-question">
@@ -681,21 +663,9 @@
                   <button class="match-option detailed" type="button" data-match-key="size" data-match-value="not-sure" aria-pressed="false"><strong>Not sure</strong><span>Use my other answers to decide</span></button>
                 </div>
               </fieldset>
-              <fieldset class="match-question">
-                <legend>5. If you bought an OHME! bundle, which product mix would you prefer?</legend>
-                <div class="match-options">
-                  <button class="match-option" type="button" data-match-key="mix" data-match-value="one-flavour" aria-pressed="false">One favourite flavour</button>
-                  <button class="match-option" type="button" data-match-key="mix" data-match-value="yogurt" aria-pressed="false">Mostly yogurt flavours</button>
-                  <button class="match-option" type="button" data-match-key="mix" data-match-value="fruit" aria-pressed="false">Mostly fruit flavours</button>
-                  <button class="match-option" type="button" data-match-key="mix" data-match-value="even" aria-pressed="false">Even mix of yogurt and fruit</button>
-                  <button class="match-option" type="button" data-match-key="mix" data-match-value="no-preference" aria-pressed="false">No preference</button>
-                </div>
-              </fieldset>
               <div class="match-actions"><button class="match-submit" id="match-submit" type="submit" disabled>Show my OHME match</button><button class="match-reset" type="reset">Reset choices</button></div>
             </form>
-            <aside class="match-result" id="match-result" tabindex="-1" aria-live="polite" aria-label="OHME product recommendation">
-              <div class="match-placeholder"><div><p class="eyebrow">Your product match</p><strong>Five survey-based choices. One useful shortlist.</strong><p>Your result will show a best match and two alternatives with pack details, current public prices, and direct OHME product links.</p></div></div>
-            </aside>
+            <aside class="match-result" id="match-result" tabindex="-1" aria-live="polite" aria-label="OHME product recommendation" hidden></aside>
           </div>
         </div>
       </section>
@@ -703,64 +673,37 @@
       <section class="benchmark-section" id="benchmarks" aria-labelledby="benchmark-title">
         <div class="section-shell">
           <div class="section-heading">
-            <div><p class="eyebrow">Comparison method</p><h2 id="benchmark-title">Three roles, not one ranking.</h2></div>
-            <p>A granola bite can teach us about portioning without being the same product as freeze-dried fruit. Every image below is contained inside its frame so the full pack or multipack remains visible.</p>
+            <div><p class="eyebrow">OHME category story</p><h2 id="benchmark-title">What makes OHME different.</h2></div>
+            <p>This category-level comparison avoids competitor brands and product photos. It focuses on the product base, texture, and pack choices that make OHME distinctive.</p>
           </div>
           <div class="read-controls">
-            <p class="read-status" id="read-status" role="status" aria-live="polite">Role 1 of 3 · OHME anchor</p>
-            <div class="read-control-group" aria-label="Scroll comparison roles"><button class="read-scroll-button" id="read-previous" type="button" aria-label="Show previous comparison role" aria-controls="read-track">Previous</button><button class="read-scroll-button" id="read-next" type="button" aria-label="Show next comparison role" aria-controls="read-track">Next</button></div>
+            <p class="read-status" id="read-status" role="status" aria-live="polite">View 1 of 3 · OHME advantage</p>
+            <div class="read-control-group" aria-label="Scroll category comparisons"><button class="read-scroll-button" id="read-previous" type="button" aria-label="Show previous category comparison" aria-controls="read-track">Previous</button><button class="read-scroll-button" id="read-next" type="button" aria-label="Show next category comparison" aria-controls="read-track">Next</button></div>
           </div>
-          <div class="read-grid" id="read-track" role="region" aria-label="Three comparison roles" tabindex="0">
+          <div class="read-grid" id="read-track" role="region" aria-label="Three category-level product comparisons" tabindex="0">
             <article class="read-card">
-              <figure class="read-media"><img src="assets/ohme-strawberry-yogurt-crunch.png" alt="OHME freeze-dried strawberry yogurt crunch pouch" loading="lazy" /><figcaption>Official OHME product image</figcaption></figure>
-              <div class="read-copy"><p class="eyebrow">OHME anchor</p><h3>Start with the product story OHME actually tells.</h3><p>Fruit-led, freeze-dried, crunchy products presented through current public OHME pages.</p></div>
-              <div class="read-card-footer"><span class="read-role-note">Brand truth comes first</span><span class="read-number">01</span></div>
+              <figure class="read-media"><img src="assets/ohme-match-yogurt-yum.png" alt="OHME yogurt crunch pouches in strawberry, mango, and blueberry flavours" loading="lazy" /><figcaption>Official OHME variety</figcaption></figure>
+              <div class="read-copy"><p class="eyebrow">OHME advantage</p><h3>Fruit leads the story.</h3><p>Real fruit, an airy freeze-dried crunch, fruit-only and yogurt-crunch options, no-added-sugar cues, and both resealable and grab-and-go formats.</p></div>
+              <div class="read-card-footer"><span class="read-role-note">Official OHME variety shown</span><span class="read-number">01</span></div>
             </article>
             <article class="read-card">
-              <figure class="read-media"><img src="assets/origo-strawberry.jpg" alt="Complete Origo freeze-dried strawberry pouches and multipack box" loading="lazy" /><figcaption>Closest public format</figcaption></figure>
-              <div class="read-copy"><p class="eyebrow">Closest formats</p><h3>Compare product form before packaging style.</h3><p>Freeze-dried fruit and crunchy fruit formats are the closest shelf references in this public set.</p></div>
-              <div class="read-card-footer"><span class="read-role-note">Full multipack image shown</span><span class="read-number">02</span></div>
+              <figure class="read-media"><div class="category-visual category-fruit" role="img" aria-label="Brand-neutral illustration for other freeze-dried fruit snacks"><strong>Other freeze-dried fruit</strong></div><figcaption>General category · no brand</figcaption></figure>
+              <div class="read-copy"><p class="eyebrow">Other freeze-dried fruit</p><h3>Similar process, narrower experience.</h3><p>General freeze-dried fruit snacks may share the crisp texture. OHME adds yogurt-crunch flavours, broader snack occasions, and both regular and snack-size formats.</p></div>
+              <div class="read-card-footer"><span class="read-role-note">Category comparison only</span><span class="read-number">02</span></div>
             </article>
             <article class="read-card">
-              <figure class="read-media"><img src="assets/madegood-chocolate-chip.png" alt="Complete MadeGood chocolate chip granola bites box and single-serve pouch" loading="lazy" /><figcaption>Packaging reference only</figcaption></figure>
-              <div class="read-copy"><p class="eyebrow">Packaging references</p><h3>Borrow the question, not the product positioning.</h3><p>Granola bites help illustrate portability, portioning, and multipack presentation without being treated as the same product.</p></div>
-              <div class="read-card-footer"><span class="read-role-note">Full box and pouch shown</span><span class="read-number">03</span></div>
+              <figure class="read-media"><div class="category-visual category-granola" role="img" aria-label="Brand-neutral illustration for general granola bars and bites"><strong>General granola bars &amp; bites</strong></div><figcaption>General category · no brand</figcaption></figure>
+              <div class="read-copy"><p class="eyebrow">General granola bars &amp; bites</p><h3>Different base, different bite.</h3><p>Granola snacks are typically grain-led and dense or chewy. OHME is fruit-led, light and crisp, with a direct real-fruit story.</p></div>
+              <div class="read-card-footer"><span class="read-role-note">Category comparison only</span><span class="read-number">03</span></div>
             </article>
-          </div>
-
-          <div class="filter-bar" role="group" aria-label="Filter public shelf products">
-            <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All six</button>
-            <button class="filter-button" type="button" data-filter="anchor" aria-pressed="false">OHME anchor</button>
-            <button class="filter-button" type="button" data-filter="direct" aria-pressed="false">Closest formats</button>
-            <button class="filter-button" type="button" data-filter="reference" aria-pressed="false">Packaging references</button>
-            <span class="filter-count" id="filter-count" role="status" aria-live="polite">Showing 6 public products</span>
-          </div>
-          <div class="product-grid" id="shelf-map">
-            <article class="product-card" data-lane="anchor"><figure class="product-media"><img src="assets/ohme-strawberry-side.png" alt="OHME freeze-dried sliced strawberries pouch" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">OHME anchor</p><h3>Fruit &amp; Yogurt Crunch</h3><p>Real-fruit story, freeze-dried texture, no-added-sugar cue, and Canadian context.</p><a class="product-source" href="https://www.ohmefoods.com/collections/all-ohme-products" target="_blank" rel="noopener noreferrer">View OHME collection</a></div></article>
-            <article class="product-card" data-lane="direct"><figure class="product-media"><img src="assets/origo-strawberry.jpg" alt="Complete Origo freeze-dried strawberry multipack" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">Closest format</p><h3>Origo Strawberry</h3><p>Freeze-dried strawberry format shown as a full pouch and multipack reference.</p><a class="product-source" href="https://origofresh.com/" target="_blank" rel="noopener noreferrer">View public source</a></div></article>
-            <article class="product-card" data-lane="direct"><figure class="product-media"><img src="assets/crispy-green-trial.png" alt="Crispy Green freeze-dried fruit trial pack" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">Closest format</p><h3>Crispy Green Trial</h3><p>A fruit-led trial presentation useful for reading portion and discovery cues.</p><a class="product-source" href="https://crispygreen.com/" target="_blank" rel="noopener noreferrer">View public source</a></div></article>
-            <article class="product-card" data-lane="reference"><figure class="product-media"><img src="assets/madegood-chocolate-chip.png" alt="Complete MadeGood granola bites box and pouch" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">Packaging reference</p><h3>MadeGood Granola Bites</h3><p>Single-pouch plus multipack architecture; used only as a packaging reference.</p><a class="product-source" href="https://www.madegoodfoods.ca/" target="_blank" rel="noopener noreferrer">View public source</a></div></article>
-            <article class="product-card" data-lane="reference"><figure class="product-media"><img src="assets/thats-it-minis.jpg" alt="That's It mini fruit bars" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">Packaging reference</p><h3>That's It Minis</h3><p>Compact individually portioned format that helps frame portability questions.</p><a class="product-source" href="https://www.thatsitfruit.com/" target="_blank" rel="noopener noreferrer">View public source</a></div></article>
-            <article class="product-card" data-lane="reference"><figure class="product-media"><img src="assets/smartsweets-sweet-fish.png" alt="SmartSweets Sweet Fish pouch" loading="lazy" /></figure><div class="product-copy"><p class="eyebrow">Packaging reference</p><h3>SmartSweets Sweet Fish</h3><p>A resealable candy pouch useful only for claim hierarchy and shelf communication.</p><a class="product-source" href="https://smartsweets.ca/" target="_blank" rel="noopener noreferrer">View public source</a></div></article>
           </div>
         </div>
       </section>
 
       <section class="matrix-section" id="pattern-matrix" aria-labelledby="matrix-title">
         <div class="section-shell">
-          <div class="section-heading"><div><p class="eyebrow">Pattern matrix</p><h2 id="matrix-title">What each role can teach.</h2></div><p>The matrix describes public pack and product signals—not taste, sales, or market-share performance.</p></div>
-          <div class="matrix-wrap"><table><thead><tr><th>Role</th><th>Product form</th><th>Pack lesson</th><th>Use in this guide</th></tr></thead><tbody><tr><td><strong>OHME anchor</strong></td><td>Freeze-dried fruit and yogurt crunch</td><td>Resealable pouch plus snack-size formats</td><td>Defines the brand truth and product promise.</td></tr><tr><td><strong>Closest formats</strong></td><td>Freeze-dried fruit</td><td>Trial, multipack, and single-pouch signals</td><td>Helps compare like product forms first.</td></tr><tr><td><strong>Packaging references</strong></td><td>Bars, bites, and candy</td><td>Portioning, portability, and claim hierarchy</td><td>Answers packaging questions without implying product equivalence.</td></tr></tbody></table></div>
-        </div>
-      </section>
-
-      <section class="sources-section" id="sources" aria-labelledby="sources-title">
-        <div class="section-shell">
-          <div class="section-heading"><div><p class="eyebrow">Public proof</p><h2 id="sources-title">Sources stay visible.</h2></div><p>Product information, pack formats, and prices point back to public brand or retailer pages. Availability can change.</p></div>
-          <div class="source-grid">
-            <article class="source-card"><h3>OHME products</h3><p>Official collection and public product pages.</p><a href="https://www.ohmefoods.com/collections/all-ohme-products" target="_blank" rel="noopener noreferrer">OHME collection</a></article>
-            <article class="source-card"><h3>Closest formats</h3><p>Public Origo and Crispy Green pages.</p><a href="https://origofresh.com/" target="_blank" rel="noopener noreferrer">Origo</a><a href="https://crispygreen.com/" target="_blank" rel="noopener noreferrer">Crispy Green</a></article>
-            <article class="source-card"><h3>Packaging references</h3><p>Public MadeGood, That's It, and SmartSweets pages.</p><a href="https://www.madegoodfoods.ca/" target="_blank" rel="noopener noreferrer">MadeGood</a><a href="https://www.thatsitfruit.com/" target="_blank" rel="noopener noreferrer">That's It</a><a href="https://smartsweets.ca/" target="_blank" rel="noopener noreferrer">SmartSweets</a></article>
-          </div>
+          <div class="section-heading"><div><p class="eyebrow">At a glance</p><h2 id="matrix-title">OHME, in category context.</h2></div><p>A high-level category comparison—not a claim of nutritional, taste, or market superiority.</p></div>
+          <div class="matrix-wrap"><table><thead><tr><th>Category</th><th>Typical product base</th><th>Typical texture</th><th>Where OHME differs</th></tr></thead><tbody><tr><td><strong>OHME</strong></td><td>Real fruit, with fruit-only and yogurt-crunch options</td><td>Light, airy, and crisp</td><td>No-added-sugar cues plus resealable and snack-size formats.</td></tr><tr><td><strong>Other freeze-dried fruit</strong></td><td>Fruit</td><td>Dry and crisp</td><td>OHME adds yogurt-crunch flavours and a wider choice of pack occasions.</td></tr><tr><td><strong>General granola bars &amp; bites</strong></td><td>Typically oats, grains, seeds, or binders</td><td>Often dense, chewy, or crunchy</td><td>OHME stays fruit-led with a lighter freeze-dried bite.</td></tr></tbody></table></div>
         </div>
       </section>
     </main>
@@ -773,7 +716,9 @@
       const matchForm = document.getElementById("snack-match-form");
       const matchSubmit = document.getElementById("match-submit");
       const matchResult = document.getElementById("match-result");
+      const matchLayout = document.querySelector(".match-layout");
       const matchOptions = Array.from(document.querySelectorAll("[data-match-key]"));
+      const crunchChoices = Array.from(document.querySelectorAll("[data-crunch]"));
 
       function updateMatchSubmit() {
         matchSubmit.disabled = ["buyer", "occasion", "priority", "size", "mix"].some((key) => !matchAnswers[key]);
@@ -793,11 +738,13 @@
       function renderMatchResults(result) {
         const primary = result.primary;
         const alternatives = result.recommendations.slice(1);
+        matchResult.hidden = false;
+        matchLayout.classList.add("has-result");
         matchResult.innerHTML = `
           <div class="match-result-head"><p class="eyebrow">Your best current match</p><h3>${primary.shortName}</h3><p>Selected from current, available products in OHME's public collection.</p></div>
           <article class="match-primary"><img src="${primary.image}" alt="${primary.name}" /><div><h4>${primary.name}</h4><p class="match-price">${priceMarkup(primary)}</p><p class="match-pack">${primary.packLabel}</p><p>${primary.description}</p><div class="match-reasons">${primary.reasons.map((reason) => `<span class="match-reason">${reason}</span>`).join("")}</div><a class="match-shop" href="${primary.url}" target="_blank" rel="noopener noreferrer">View this product on OHME</a></div></article>
           <div class="match-alternatives" aria-label="Alternative OHME matches">${alternatives.map((product) => `<article class="match-alternative"><img src="${product.image}" alt="" /><div><strong>${product.shortName}</strong><span>CAD $${product.price.toFixed(2)} · ${product.packLabel}</span><a href="${product.url}" target="_blank" rel="noopener noreferrer">View alternative</a></div></article>`).join("")}</div>
-          <p class="match-disclaimer">Recommendation uses only the five choices above and current public product data. It is not nutrition or medical advice. Price check: July 15, 2026.</p>`;
+          <p class="match-disclaimer">Recommendation uses your crunch-family choice, the four questions above, and current public OHME product data. It is not nutrition or medical advice. Price check: July 15, 2026.</p>`;
         matchResult.focus({ preventScroll: true });
       }
 
@@ -806,7 +753,9 @@
         event.preventDefault();
         if (matchSubmit.disabled) return;
         if (!window.OhmeSnackMatch) {
-          matchResult.innerHTML = '<div class="match-placeholder"><div><strong>Product matcher unavailable.</strong><p>Please refresh the page and try again.</p></div></div>';
+          matchResult.hidden = false;
+          matchLayout.classList.add("has-result");
+          matchResult.innerHTML = '<p class="match-error">Product matcher unavailable. Please refresh the page and try again.</p>';
           return;
         }
         renderMatchResults(window.OhmeSnackMatch.recommendProducts(matchAnswers));
@@ -814,7 +763,10 @@
       matchForm.addEventListener("reset", () => {
         Object.keys(matchAnswers).forEach((key) => delete matchAnswers[key]);
         matchOptions.forEach((button) => button.setAttribute("aria-pressed", "false"));
-        matchResult.innerHTML = '<div class="match-placeholder"><div><p class="eyebrow">Your product match</p><strong>Five survey-based choices. One useful shortlist.</strong><p>Your result will show a best match and two alternatives with pack details, current public prices, and direct OHME product links.</p></div></div>';
+        crunchChoices.forEach((button) => button.setAttribute("aria-pressed", "false"));
+        matchResult.hidden = true;
+        matchResult.innerHTML = "";
+        matchLayout.classList.remove("has-result");
         updateMatchSubmit();
       });
 
@@ -827,18 +779,19 @@
       document.querySelectorAll("[data-moment]").forEach((button) => button.addEventListener("click", () => {
         const preset = momentMap[button.dataset.moment];
         Object.entries(preset).forEach(([key, value]) => selectMatchAnswer(key, value));
-        document.getElementById("snack-match").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        document.getElementById("crunch-title").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       }));
 
-      document.querySelectorAll("[data-crunch]").forEach((button) => button.addEventListener("click", () => {
-        document.querySelectorAll("[data-crunch]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      crunchChoices.forEach((button) => button.addEventListener("click", () => {
+        crunchChoices.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
         selectMatchAnswer("mix", button.dataset.crunch);
+        matchForm.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       }));
 
       const compareCopy = {
-        ingredients: "OHME leads with real fruit, freeze-dried texture, and no-added-sugar cues. Benchmark products are separated by comparison role so unlike snacks are not treated as direct equivalents.",
-        pack: "OHME uses both 3 × 16g snack-size formats and 44g resealable regular pouches. The benchmark library shows trial, multipack, portability, and claim-hierarchy references.",
-        price: "Snack Match uses current public OHME prices and labels the review date. Public prices can change, so every recommendation links back to the live OHME listing.",
+        ingredients: "OHME starts with real fruit, with fruit-only and yogurt-crunch options. The comparison below stays at category level and does not use competitor branding.",
+        texture: "OHME's freeze-dried process creates a light, airy crispness that differs from the dense or chewy experience common to general granola bars and bites.",
+        pack: "OHME offers both 3 × 16g snack-size formats and resealable regular pouches, so the same fruit-led idea can fit travel, lunchboxes, topping, or home snacking.",
       };
       const comparePanel = document.getElementById("compare-panel");
       document.querySelectorAll("[data-compare-tab]").forEach((button) => button.addEventListener("click", () => {
@@ -863,7 +816,7 @@
       function updateReadControls() {
         const activeIndex = activeReadCardIndex();
         const role = readCards[activeIndex].querySelector(".eyebrow").textContent;
-        readStatus.textContent = `Role ${activeIndex + 1} of ${readCards.length} · ${role}`;
+        readStatus.textContent = `View ${activeIndex + 1} of ${readCards.length} · ${role}`;
         readPrevious.disabled = activeIndex === 0;
         readNext.disabled = activeIndex === readCards.length - 1;
       }
@@ -881,21 +834,6 @@
       readTrack.addEventListener("scroll", () => { cancelAnimationFrame(readFrame); readFrame = requestAnimationFrame(updateReadControls); }, { passive: true });
       window.addEventListener("resize", updateReadControls);
       updateReadControls();
-
-      const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-      const productCards = Array.from(document.querySelectorAll("[data-lane]"));
-      const filterCount = document.getElementById("filter-count");
-      filterButtons.forEach((button) => button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-        let visibleCount = 0;
-        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-        productCards.forEach((card) => {
-          const visible = filter === "all" || card.dataset.lane === filter;
-          card.hidden = !visible;
-          if (visible) visibleCount += 1;
-        });
-        filterCount.textContent = `Showing ${visibleCount} public ${visibleCount === 1 ? "product" : "products"}`;
-      }));
     </script>
   </body>
 </html>

@@ -4,29 +4,27 @@
 - Implementation: `http://127.0.0.1:4178/snack-match/`
 - Final implementation screenshot: `/tmp/ohme-homepage-hero-qa-final.png`
 - Combined comparison board: `/tmp/ohme-design-qa-comparison-final.png`
-- Focused Origo evidence: `/tmp/ohme-origo-full-mobile.png`
-- Focused MadeGood evidence: `/tmp/ohme-madegood-full-final.png`
 - Desktop comparison viewport: 864px wide; in-app Browser capture height 1067px
 - Mobile verification viewport: 390 × 844
-- State: public homepage default state, plus comparison roles 2 and 3 and a completed Snack Match result
+- State: public homepage default state, two crunch-family choices, three category comparisons, and a completed Snack Match result
 
 ## Full-view comparison evidence
 
-The combined board places the top 1067px of the supplied reference beside the final browser-rendered implementation. Both use the same core hierarchy: red brand navigation, mint diamond field, oversized OHME typography, centered strawberry yogurt pouch, red serif question, primary moment CTA, and a four-image occasion strip. The implementation intentionally continues below this consumer-brand introduction with the full five-question Qualtrics-derived matcher and source-linked benchmark library.
+The combined board places the top 1067px of the supplied reference beside the final browser-rendered implementation. Both use the same core hierarchy: red brand navigation, mint diamond field, oversized OHME typography, centered strawberry yogurt pouch, red serif question, primary moment CTA, and a four-image occasion strip. The implementation continues with a crunch-family choice, four Qualtrics-derived questions, and a brand-safe category comparison focused on OHME's differences.
 
 ## Required fidelity surfaces
 
 - Fonts and typography: Georgia provides the same high-contrast editorial serif role as the reference for the logo and display headings. Arial is limited to compact navigation, helper copy, and controls. Heading scale, optical weight, and red hierarchy match the reference without clipping at 864px or 390px.
 - Spacing and layout rhythm: the header, hero, CTA panel, four-up moment strip, crunch selector, compare teaser, and pink trust strip follow the reference order and proportions. The desktop grid becomes horizontal, touch-scrollable rails on mobile; no document-level horizontal overflow was detected.
 - Colors and visual tokens: the implementation consistently maps the reference strawberry red, warm cream, mint diamond pattern, pale pink, and soft yellow into shared CSS tokens. Text and controls retain sufficient contrast.
-- Image quality and asset fidelity: the hero uses an official OHME product asset. Four custom lifestyle images were created from the supplied visual direction and OHME pouch reference, then compressed as high-quality JPEGs. All scenario images have intentional cover crops. Product and benchmark images use bounded `object-fit: contain` regions so imagery cannot cover card copy.
-- Copy and content: the major reference copy is preserved: “How will you OHME?”, “Find your moment”, “Pick your crunch”, and “Curious how it compares?”. The duplicate match preview was removed so the five survey-derived questions remain the page's single Snack Match flow; exact 3 × 16g and 44g resealable pack descriptions, price context, and source caveats remain intact.
+- Image quality and asset fidelity: the hero uses an official OHME product asset. Four custom lifestyle images were created from the supplied visual direction and OHME pouch reference, then compressed as high-quality JPEGs. All scenario images have intentional cover crops. The comparison scroller uses an official multi-flavour OHME pack image plus two brand-neutral category visuals.
+- Copy and content: the major reference copy is preserved: “How will you OHME?”, “Find your moment”, and “Pick your crunch”. The crunch choice now replaces the repeated bundle-mix question and scrolls directly to four survey-derived package questions; exact 3 × 16g and 44g resealable pack descriptions and current OHME price context remain intact.
 - Icons and controls: functional text controls replace unsupported decorative glyph approximations. Search and Cart remain visible at the desktop reference width. All primary controls are semantic links or buttons with visible focus states.
 - Accessibility and responsiveness: keyboard focus is visible, comparison cards support arrow-key navigation, images have contextual alt text, reduced-motion behavior is respected, tap targets are at least 42px high, and the 390px layout has no document overflow.
 
 ## Focused region comparison evidence
 
-Focused screenshots were required because the user's annotations specifically identified cropped or obstructed product images. OHME, Origo, and MadeGood now remain fully contained below their role labels and above the copy boundary. The media frame remains 300px tall on mobile, with reserved label space inside the frame.
+Focused checks cover the connected Crunch-to-Match journey, hidden-until-needed recommendation panel, and brand-neutral category comparison. Competitor product names, logos, photos, product links, the six-card shelf map, and the standalone source directory are absent from the public page.
 
 ## Comparison history
 
@@ -39,10 +37,8 @@ Focused screenshots were required because the user's annotations specifically id
 ### Post-fix evidence
 
 - `/tmp/ohme-design-qa-comparison-final.png` shows the corrected hero hierarchy and reference-aligned brand language.
-- `/tmp/ohme-origo-full-mobile.png` shows the complete Origo multipack.
-- `/tmp/ohme-madegood-full-final.png` shows the complete MadeGood box and pouch with no label obstruction.
 - Browser checks found no console errors and no desktop or mobile document overflow.
-- Desktop and mobile comparison controls both advance through all three roles.
+- Desktop and mobile comparison controls both advance through all three brand-safe category views.
 
 ## Findings
 
@@ -50,15 +46,17 @@ No actionable P0, P1, or P2 differences remain.
 
 ## Open Questions
 
-- None blocking. The longer page is intentional because it preserves the functional five-question Snack Match and public comparison evidence below the screenshot-led brand homepage.
+- None blocking. The result panel stays absent until a user submits the four-question match, keeping the initial journey compact.
 
 ## Implementation checklist
 
 - [x] Match the reference's consumer-brand homepage hierarchy.
 - [x] Add four responsive OHME moment images and interactive presets.
 - [x] Preserve the complete Snack Match flow and current public-price recommendations.
-- [x] Show full OHME, Origo, and MadeGood images without crop or overlay obstruction.
-- [x] Keep all six shelf-map product images inside their media regions and separate from card copy.
+- [x] Use Pick your crunch as the product-family signal and remove the repeated fifth question.
+- [x] Hide the empty recommendation panel until a result exists.
+- [x] Replace competitor brands and photos with general category comparisons focused on OHME advantages.
+- [x] Remove the shelf map and standalone source directory while retaining direct OHME result links.
 - [x] Verify desktop, mobile, interactions, console, and automated tests.
 
 ## Follow-up polish

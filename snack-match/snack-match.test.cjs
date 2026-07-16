@@ -98,33 +98,37 @@ test("keeps one complete Snack Match flow without a duplicate preview", () => {
   assert.match(html, /src="snack-match\.js"/);
 });
 
-test("uses specific published-survey language and explains pack size and resealability", () => {
+test("uses four package questions plus the separate crunch-family choice", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
   assert.match(html, /Who do you usually buy packaged snacks for\?/);
   assert.match(html, /When would you most often eat OHME!/);
   assert.match(html, /When you buy snacks, what matters most\?/);
   assert.match(html, /If both sizes were available in your preferred flavour, which would you buy\?/);
-  assert.match(html, /If you bought an OHME! bundle/);
+  assert.doesNotMatch(html, /If you bought an OHME! bundle/);
   assert.match(html, /3 × 16g/);
   assert.match(html, /44g · resealable/);
   assert.match(html, /data-match-key="buyer"/);
   assert.match(html, /data-match-key="occasion"/);
   assert.match(html, /data-match-key="priority"/);
   assert.match(html, /data-match-key="size"/);
-  assert.match(html, /data-match-key="mix"/);
+  assert.doesNotMatch(html, /data-match-key="mix"/);
+  assert.equal((html.match(/class="match-question"/g) || []).length, 4);
+  assert.equal((html.match(/data-crunch=/g) || []).length, 2);
 });
 
-test("adds an image-led, keyboard-accessible comparison role scroller", () => {
+test("adds a brand-safe, keyboard-accessible category comparison scroller", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
   assert.match(html, /id="read-track"/);
   assert.match(html, /id="read-previous"/);
   assert.match(html, /id="read-next"/);
   assert.match(html, /scroll-snap-type: inline mandatory/);
-  assert.match(html, /assets\/ohme-strawberry-yogurt-crunch\.png/);
-  assert.match(html, /assets\/origo-strawberry\.jpg/);
-  assert.match(html, /assets\/madegood-chocolate-chip\.png/);
+  assert.match(html, /assets\/ohme-match-yogurt-yum\.png/);
+  assert.match(html, /Other freeze-dried fruit/);
+  assert.match(html, /General granola bars &amp; bites/);
+  assert.match(html, /class="category-visual category-fruit"/);
+  assert.match(html, /class="category-visual category-granola"/);
   assert.match(html, /event\.key !== "ArrowLeft"/);
 });
 
@@ -152,21 +156,36 @@ test("matches the OHME brand-home reference with moment imagery and interactive 
   assert.match(html, /data-compare-tab="ingredients"/);
 });
 
-test("keeps all comparison images contained below their labels", () => {
+test("connects the crunch choice to Snack Match and hides the empty result panel", () => {
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+
+  const crunchIndex = html.indexOf('class="crunch-section"');
+  const formIndex = html.indexOf('id="snack-match-form"');
+  assert.ok(crunchIndex > -1 && crunchIndex < formIndex);
+  assert.match(html, /selectMatchAnswer\("mix", button\.dataset\.crunch\)/);
+  assert.match(html, /matchForm\.scrollIntoView/);
+  assert.match(html, /id="match-result"[^>]*hidden/);
+  assert.match(html, /matchResult\.hidden = false/);
+  assert.match(html, /matchResult\.hidden = true/);
+  assert.doesNotMatch(html, /Five survey-based choices\. One useful shortlist/);
+});
+
+test("keeps the OHME comparison image contained below its label", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
   assert.match(html, /\.read-media img \{[^}]*min-width: 0;[^}]*min-height: 0;[^}]*max-width: 100%;[^}]*max-height: 100%;[^}]*object-fit: contain;/s);
   assert.match(html, /padding: 52px 28px 28px;/);
   assert.match(html, /padding: 48px 24px 24px;/);
-  assert.match(html, /OHME freeze-dried strawberry yogurt crunch pouch/);
-  assert.match(html, /Complete Origo freeze-dried strawberry pouches and multipack box/);
-  assert.match(html, /Complete MadeGood chocolate chip granola bites box and single-serve pouch/);
+  assert.match(html, /OHME yogurt crunch pouches in strawberry, mango, and blueberry flavours/);
 });
 
-test("keeps shelf-map product images inside media regions above the copy", () => {
+test("removes competitor branding, the shelf map, and the standalone sources section", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
-  assert.match(html, /\.product-media \{[^}]*margin: 0;[^}]*overflow: hidden;/s);
-  assert.match(html, /\.product-media img \{[^}]*min-width: 0;[^}]*min-height: 0;[^}]*max-width: 100%;[^}]*max-height: 100%;[^}]*object-fit: contain;/s);
-  assert.equal((html.match(/class="product-card"/g) || []).length, 6);
+  assert.doesNotMatch(html, /id="shelf-map"|class="product-card"|data-filter=/);
+  assert.doesNotMatch(html, /id="sources"|sources-section|Sources stay visible/);
+  assert.doesNotMatch(html, /Origo|Crispy Green|MadeGood|That's It|SmartSweets/);
+  assert.doesNotMatch(html, /origofresh\.com|crispygreen\.com|madegoodfoods\.ca|thatsitfruit\.com|smartsweets\.ca/);
+  assert.match(html, /category-level comparison/i);
+  assert.match(html, /What makes OHME different/);
 });
