@@ -19,7 +19,7 @@ The combined board places the top 1067px of the supplied reference beside the fi
 - Fonts and typography: Georgia provides the same high-contrast editorial serif role as the reference for the logo and display headings. Arial is limited to compact navigation, helper copy, and controls. Heading scale, optical weight, and red hierarchy match the reference without clipping at 864px or 390px.
 - Spacing and layout rhythm: the header, hero, CTA panel, four-up moment strip, crunch selector, compare teaser, and pink trust strip follow the reference order and proportions. The desktop grid becomes horizontal, touch-scrollable rails on mobile; no document-level horizontal overflow was detected.
 - Colors and visual tokens: the implementation consistently maps the reference strawberry red, warm cream, mint diamond pattern, pale pink, and soft yellow into shared CSS tokens. Text and controls retain sufficient contrast.
-- Image quality and asset fidelity: the hero uses an official OHME product asset. Four custom lifestyle images were created from the supplied visual direction and OHME pouch reference, then compressed as high-quality JPEGs. All scenario images have intentional cover crops. Product and benchmark images use `object-fit: contain`.
+- Image quality and asset fidelity: the hero uses an official OHME product asset. Four custom lifestyle images were created from the supplied visual direction and OHME pouch reference, then compressed as high-quality JPEGs. All scenario images have intentional cover crops. Product and benchmark images use bounded `object-fit: contain` regions so imagery cannot cover card copy.
 - Copy and content: the major reference copy is preserved: “How will you OHME?”, “Find your moment”, “Pick your crunch”, and “Curious how it compares?”. The duplicate match preview was removed so the five survey-derived questions remain the page's single Snack Match flow; exact 3 × 16g and 44g resealable pack descriptions, price context, and source caveats remain intact.
 - Icons and controls: functional text controls replace unsupported decorative glyph approximations. Search and Cart remain visible at the desktop reference width. All primary controls are semantic links or buttons with visible focus states.
 - Accessibility and responsiveness: keyboard focus is visible, comparison cards support arrow-key navigation, images have contextual alt text, reduced-motion behavior is respected, tap targets are at least 42px high, and the 390px layout has no document overflow.
@@ -58,6 +58,7 @@ No actionable P0, P1, or P2 differences remain.
 - [x] Add four responsive OHME moment images and interactive presets.
 - [x] Preserve the complete Snack Match flow and current public-price recommendations.
 - [x] Show full OHME, Origo, and MadeGood images without crop or overlay obstruction.
+- [x] Keep all six shelf-map product images inside their media regions and separate from card copy.
 - [x] Verify desktop, mobile, interactions, console, and automated tests.
 
 ## Follow-up polish

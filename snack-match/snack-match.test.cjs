@@ -162,3 +162,11 @@ test("keeps all comparison images contained below their labels", () => {
   assert.match(html, /Complete Origo freeze-dried strawberry pouches and multipack box/);
   assert.match(html, /Complete MadeGood chocolate chip granola bites box and single-serve pouch/);
 });
+
+test("keeps shelf-map product images inside media regions above the copy", () => {
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+
+  assert.match(html, /\.product-media \{[^}]*margin: 0;[^}]*overflow: hidden;/s);
+  assert.match(html, /\.product-media img \{[^}]*min-width: 0;[^}]*min-height: 0;[^}]*max-width: 100%;[^}]*max-height: 100%;[^}]*object-fit: contain;/s);
+  assert.equal((html.match(/class="product-card"/g) || []).length, 6);
+});
