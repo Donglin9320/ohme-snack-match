@@ -87,12 +87,13 @@ test("returns three unique, available recommendations ordered by score", () => {
   assert.ok(PRODUCTS.length >= 7);
 });
 
-test("keeps every Snack Match entry point on the product discovery page", () => {
+test("keeps one complete Snack Match flow without a duplicate preview", () => {
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
-  assert.match(html, /id="snack-match"/);
-  assert.equal((html.match(/href="#snack-match"/g) || []).length, 3);
+  assert.equal((html.match(/id="snack-match"/g) || []).length, 1);
+  assert.equal((html.match(/href="#snack-match"/g) || []).length, 2);
   assert.doesNotMatch(html, /href="\.\.\/index\.html"/);
+  assert.doesNotMatch(html, /match-journey|Find your OHME moment|Start with three quick signals/);
   assert.match(html, /id="snack-match-form"/);
   assert.match(html, /src="snack-match\.js"/);
 });
@@ -141,7 +142,6 @@ test("matches the OHME brand-home reference with moment imagery and interactive 
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
   assert.match(html, /How will you OHME\?/);
-  assert.match(html, /Find your OHME moment/);
   assert.match(html, /Pick your crunch/);
   assert.match(html, /ohme-moment-on-the-go\.jpg/);
   assert.match(html, /ohme-moment-topping\.jpg/);
